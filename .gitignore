@@ -1,0 +1,7 @@
+creds.py
+*.csv
+commons.py
+databases.py
+
+*__pycache__/
+*.idea
