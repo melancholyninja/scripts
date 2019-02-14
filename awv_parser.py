@@ -24,6 +24,25 @@ chartspan_providers = map_chartspan_providers()
 
 print(chartspan_providers)
 
+
+def add_total_benes(chartspan_providers):
+
+    new_map = {}
+
+    for k, v in chartspan_providers.items():
+        temp_total_benes = 0
+        with open('big_file.csv', 'r') as f:
+            big_file = csv.DictReader(f)
+            for row in big_file:
+                if k == row['National Provider Identifier']:
+                    temp_total_benes = row['Number of Medicare Beneficiaries']
+
+            new_dict = {}
+            new_dict['npi'] = chartspan_providers[k]['npi']
+            new_dict['name'] = chartspan_providers[k]['name']
+            new_dict['total_beneficiaries'] = temp_total_benes
+            new_map[k] = new_dict
+    return new_map
 # with open('puf.csv', 'r') as f:
 #     chartspan_providers_in_puf = []
 #     reader = csv.DictReader(f)
