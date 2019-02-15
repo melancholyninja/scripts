@@ -26,13 +26,11 @@ def map_puf_file():
     with open('puf_file.csv', 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            total_awvs = 0
             npi = row['National Provider Identifier']
             last_name = row['Last Name/Organization Name of the Provider']
             first_name = row['First Name of the Provider']
             awvs = row['Number of Services']
             avg_payment = row['Average Medicare Payment Amount']
-            total_awvs = awvs
             provider = {
                 'npi': npi,
                 'last_name': last_name,
@@ -40,13 +38,16 @@ def map_puf_file():
                 'awvs': awvs,
                 'avg_payment': avg_payment
             }
+            if npi in puf_map.keys():
+                pass
+
             puf_map[npi] = provider
     return puf_map
 
 
 def main():
     chartspan_providers = map_chartspan_providers()
-    print(chartspan_providers)
+    print(chartspan_providers['1194750570'])
     # with open('chartspan_awvs.csv', 'w') as f:
     #     fieldnames = ['name', 'npi', 'client', 'total_beneficiaries', 'total_awvs']
     #     writer = csv.DictWriter(map_with_total_awvs, fieldnames=fieldnames)
@@ -56,6 +57,10 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
 
 
 
